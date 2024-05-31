@@ -21,6 +21,10 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    const {username,email,password,cpassword} = formData;
+   if(password !== cpassword){
+    alert("password not match")
+   }
     // Here, you can handle form submission, e.g., send data to an API
   };
 
@@ -28,7 +32,7 @@ const Register = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center">Sign Up</h2>
-        <form className="mt-8 space-y-6" >
+        <form className="mt-8 space-y-6"  onSubmit={handleSubmit}>
           <div className="  rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="username" className="sr-only">Username</label>
@@ -86,7 +90,7 @@ const Register = () => {
           <div>
             <button
               type="submit"
-              onSubmit={handleSubmit}
+             
               className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Sign Up
