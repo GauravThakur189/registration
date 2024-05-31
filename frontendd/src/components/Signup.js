@@ -26,7 +26,7 @@ const Signup = () => {
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center">Sign Up</h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="  rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="username" className="sr-only">Username</label>
               <input
@@ -74,6 +74,9 @@ const Signup = () => {
             >
               Sign Up
             </button>
+          </div>
+          <div>
+            <p>Already have an account ? Login</p>
           </div>
         </form>
       </div>
