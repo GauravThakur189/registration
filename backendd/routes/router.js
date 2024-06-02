@@ -1,6 +1,8 @@
  const express = require('express');
  const Userdb = require('../models/userSchema')
  const router  = express.Router();
+ const bcrypt = require('bcryptjs')
+
  
 
  router.post('/register',async(req,res)=>{
@@ -49,7 +51,28 @@
 
  //login api
  router.post('/login',async(req,res)=>{
-    console.log(req.body);
+    const {email,password} = req.body;
+    if(!email || !password){
+        return res.status(422).json({error:"fill all the details"})
+    }
+
+   try {
+    
+    const userValid =  await Userdb.findOne({email:email});
+
+    if(userValid){
+        const passwordMatch = await  bcrypt.compare(password,userValid.password)
+
+        if(!passwordMatch){
+            return res.status(422).json({error:"Invalid Password"})
+        }else{
+            
+        }
+    }
+
+   } catch (error) {
+    
+   } 
  })
 
  module.exports = router;
