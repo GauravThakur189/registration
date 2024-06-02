@@ -14,9 +14,21 @@ const Login = () => {
    setFormData({...formData,[name]:value});
 }
 
-   const handleSubmit  = (e)=>{
+   const handleSubmit  = async(e)=>{
       e.preventDefault();
-      console.log(formData);
+      // console.log(formData);
+      const {email,password} = formData;
+      const data = await fetch('http://localhost:8000/register',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          email,password
+        })
+      })
+         const res = await data.json();
+         console.log(res);
    }
 
   return (

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
 
 const userSchema = new mongoose.Schema({
@@ -34,6 +35,19 @@ const userSchema = new mongoose.Schema({
         }
     ]
 })
+
+
+
+// Hashing the password using pre method of mongoose
+userSchema.pre("save", async function(next) {
+    // Use a regular function to properly bind `this`
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 12);
+        this.cpassword = await bcrypt.hash(this.cpassword, 12);
+    }
+    next();
+});
+
 
 const Userdb = new mongoose.model('User',userSchema);
 

@@ -18,13 +18,34 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
     const {username,email,password,cpassword} = formData;
    if(password !== cpassword){
     alert("password not match")
    }
+    else{
+       const data = await fetch('http://localhost:8000/register',{
+        method:'POST',
+        headers:{
+          'Content-Type':'Application/json'
+        },
+        body:JSON.stringify({
+          username,email,password,cpassword
+        })
+       })
+
+       const res = await data.json()
+       if(res.status==201){
+        alert("register successfully")
+        setFormData({...formData,username: '',
+        email: '',
+        password: '',
+        cpassword:''})
+       }
+    }
+   
     // Here, you can handle form submission, e.g., send data to an API
   };
 
