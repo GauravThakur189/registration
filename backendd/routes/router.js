@@ -2,6 +2,8 @@
  const Userdb = require('../models/userSchema')
  const router  = express.Router();
  const bcrypt = require('bcryptjs')
+ const cookieParser = require('cookie-parser');
+ const authenticate = require('../middlware/authenticate')
 
  
 
@@ -64,15 +66,38 @@
         const passwordMatch = await  bcrypt.compare(password,userValid.password)
 
         if(!passwordMatch){
-            return res.status(422).json({error:"Invalid Password"})
+            return res.status(422).json({error:"Invalid Passworddd"})
         }else{
+            //token generation
+            const token = await userValid.generateAuthToken();
+            res.cookie('usercookie',token,{
+                expires:new Date(Date.now()+900000),
+                httpOnly:true,
+                sameSite:'strict'
+            })
+            const result = {
+               userValid,
+               token
+
+            }
             
+            res.status(200).json({status:201,result})
         }
     }
 
    } catch (error) {
-    
+        res.status(422).json(error);
+        console.log("error in login" + error);
    } 
+ })
+
+ router.get('/validuser',authenticate,async(req,res)=>{
+    try {
+        const validUserOne = await Userdb.findOne({_id:req.userId})
+        res.status(201).json({status:201,validUserOne})
+    } catch (error) {
+        res.status(401).json({status:401,validUserOne})
+    }
  })
 
  module.exports = router;

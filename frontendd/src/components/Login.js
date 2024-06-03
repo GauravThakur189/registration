@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -7,7 +7,7 @@ const Login = () => {
     email:'',
     password:'',
   });
-
+   const history = useNavigate();
 
   const handleChange = (e)=>{
    const {name,value} = e.target;
@@ -29,6 +29,11 @@ const Login = () => {
       })
          const res = await data.json();
          console.log(res);
+         if(res.status===201){
+          localStorage.setItem("usersDataToken",res.result.token);
+          history('/dash')
+          setFormData({...formData,email:'',password:''})
+         }
    }
 
   return (
