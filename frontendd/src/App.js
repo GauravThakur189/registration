@@ -5,10 +5,11 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 import Error from './components/Error'
+import Context from './ContextApi/Context'
 
 const App = () => {
   return (
-    <BrowserRouter>
+    
     <div>
     <Header/>
     <Routes>
@@ -19,7 +20,7 @@ const App = () => {
     </Routes>
     
     </div>
-    </BrowserRouter>
+   
   )
 }
 
