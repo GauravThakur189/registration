@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { LoginContext } from '../ContextApi/Context';
+
 
 const Dashboard = () => {
 
-  const {loginData,setLoginData} = useContext(LoginContext)
+  
    
   const history = useNavigate();
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
     }
     else{
       console.log("user verfied");
-      setLoginData(data);
+      
       history('/dash')
     }
   }

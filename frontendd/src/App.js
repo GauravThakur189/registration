@@ -5,12 +5,15 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 import Error from './components/Error'
-import Context from './ContextApi/Context'
+import ContextProvider from './components/ContextProvider/ContextProvider'
+
 
 const App = () => {
   return (
     
     <div>
+    <ContextProvider>
+    
     <Header/>
     <Routes>
       <Route path='/' element={<Login/>}/>
@@ -18,7 +21,7 @@ const App = () => {
       <Route path='/dash' element={<Dashboard/>}/>
       <Route path='*' element={<Error/>}/>
     </Routes>
-    
+    </ContextProvider>
     </div>
    
   )
