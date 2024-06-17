@@ -31,6 +31,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     authenticate();
+    
   },[])
     
     
